@@ -1,0 +1,37 @@
+import logging
+import sys
+from pathlib import Path
+
+
+class CustomAppLogger:
+    """Thin wrapper around the stdlib logger, configured once and reused app-wide."""
+
+    _logger: logging.Logger | None = None
+
+    @classmethod
+    def get_logger(cls, name: str = "api") -> logging.Logger:
+        if cls._logger is not None:
+            return cls._logger
+
+        logger = logging.getLogger(name)
+        logger.setLevel(logging.INFO)
+
+        formatter = logging.Formatter(
+            "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
+            datefmt="%Y-%m-%d %H:%M:%S",
+        )
+
+        stream_handler = logging.StreamHandler(sys.stdout)
+        stream_handler.setFormatter(formatter)
+        logger.addHandler(stream_handler)
+
+        Path("logs").mkdir(exist_ok=True)
+        file_handler = logging.FileHandler("logs/app.log")
+        file_handler.setFormatter(formatter)
+        logger.addHandler(file_handler)
+
+        cls._logger = logger
+        return logger
+
+
+app_logger = CustomAppLogger.get_logger()

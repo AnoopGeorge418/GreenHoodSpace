@@ -1,0 +1,100 @@
+[project]
+name = "greenhoodspace"
+version = "0.1.0"
+description = "An Universal api that provides different protective and clean services for smooth performance and run of GreenHoodSpace."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[all]",
+    "uvicorn",
+    "asyncpg",
+    "alembic>=1.20.0",
+    "pydantic>=2.13.5",
+    "sqlalchemy>=2.1.1",
+    "greenlet>=3.5.6",
+]
+
+[dependency-groups]
+dev = [
+    "poethepoet>=0.48.0",
+    "pyrefly>=1.3.1",
+    "ruff>=0.16.9",
+]
+
+
+# Custom Poe Commands
+[tool.poe.tasks.dev]
+cmd="uv run -m app.main"
+help="Starts Fastapi development Server"
+
+# code format
+[tool.ruff]
+line-length = 79
+
+[tool.poe.tasks.format]
+cmd="ruff format ."
+help="Formats code file style using Ruff"
+
+[tool.poe.tasks.format-check]
+cmd="ruff format --check ."
+help="Checks the codefiles for formatting using Ruff"
+
+# linting
+[tool.poe.tasks.lint]
+cmd="ruff check . --fix"
+help="Runs linting on all code files in the directory."
+
+[tool.poe.tasks.lint-check]
+cmd="ruff check ."
+help="Checks for linting on all code files in the directory."
+
+# type check 
+# pyrefly init first then run
+[tool.poe.tasks.type-check]
+cmd = "pyrefly check"
+help = "Checks type errors in code files"
+
+[tool.poe.tasks.type-suppress]
+cmd = "pyrefly check --suppress-errors"
+help = "Suppresses current type errors with ignore comments"
+
+[tool.poe.tasks.type-clean]
+cmd = "pyrefly check --remove-unused-ignores"
+help = "Removes ignore comments that are no longer needed"
+
+# freeze packages to requirements.txt
+[tool.poe.tasks.freeze]
+shell="uv pip freeze > requirements.txt"
+help="Copies all the installed packages to requirements.txt file"
+
+# alembic 
+[tool.poe.tasks.alembic-init]
+shell = "alembic init alembic --template async"
+help="Sets up alembic for codebase"
+
+[tool.poe.tasks.makemigration]
+cmd="alembic revision --autogenerate -m '${message}'"
+args=[
+    { name="message", type="string", default="new migration version" }
+]
+help="Creates a new Alembic migration"
+
+[tool.poe.tasks.upgrade]
+cmd="alembic upgrade head"
+help="Performs alembic migration to database"
+
+# Quick Checks
+[tool.poe.tasks.checks]
+sequence=["format-check", "lint-check", "type-check"]
+help="Checks formatting, linting, type checking all together"
+
+# Quick styles
+[tool.poe.tasks.styles]
+sequence = ["format", "lint", "type-check", "freeze"]
+help="Writes formatting, linting, type checking and package freezing all together"
+
+[tool.pyrefly]
+project-includes = ["app", "alembic"]
+project-excludes = ["**/.venv/**"]
+python-version = "3.12"
+
