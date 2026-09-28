@@ -14,7 +14,7 @@ app = FastAPI(
 
 # registering routes
 app.include_router(
-    router=health_route, prefix=f"/{APP_SETTINGS.SERVER_BASE_API}"
+    router=health_route, prefix=f"{APP_SETTINGS.SERVER_BASE_API}"
 )
 
 if __name__ == "__main__":
