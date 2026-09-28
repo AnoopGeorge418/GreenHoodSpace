@@ -25,5 +25,8 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "@babel/preset-typescript": "^8.0.1"
+  }
 }

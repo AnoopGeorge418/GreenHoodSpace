@@ -1,9 +1,9 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-    /* config options here */
-    transpilePackages: ["@greenhoodspace/ui"],
-    reactCompiler: true,
+	/* config options here */
+	transpilePackages: ['@greenhoodspace/ui'],
+	reactCompiler: true,
 };
 
 export default nextConfig;
