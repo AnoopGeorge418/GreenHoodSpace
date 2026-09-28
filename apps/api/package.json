@@ -1,0 +1,10 @@
+{
+    "name": "api",
+    "private": true,
+    "scripts": {
+        "dev": "uv run poe dev",
+        "lint": "uv run poe lint",
+        "format": "uv run poe format",
+        "check-types": "uv run poe type-check"
+    }
+}

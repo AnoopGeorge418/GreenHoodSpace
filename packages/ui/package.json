@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
+    "./components/*": "./src/components/*.tsx",
+    "./hooks/*": "./src/hooks/*.ts",
+    "./lib/*": "./src/lib/*.ts",
+    "./globals.css": "./src/styles/globals.css",
     "./*": "./src/*.tsx"
   },
   "scripts": {
@@ -11,8 +15,8 @@
     "check-types": "tsc --noEmit"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
-    "@repo/typescript-config": "*",
+    "@greenhoodspace/eslint-config": "*",
+    "@greenhoodspace/typescript-config": "*",
     "@types/node": "26.4.1",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.5",
@@ -20,7 +24,13 @@
     "typescript": "7.0.2"
   },
   "dependencies": {
+    "@babel/preset-typescript": "^8.0.1",
+    "@base-ui/react": "^1.8.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.48.0",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "tailwind-merge": "^3.7.0"
   }
 }
