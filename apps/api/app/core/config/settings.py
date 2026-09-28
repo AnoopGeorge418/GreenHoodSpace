@@ -20,7 +20,7 @@ class Settings(BaseSettings):
 
     SERVER_NAME: str = "greenhoodspace"
     SERVER_PATH: str = "app.main:app"
-    SERVER_HOST: str = "127.0.0.1"
+    SERVER_HOST: str = "0.0.0.0"
     SERVER_PORT: int = 8000
     SERVER_RELOAD: bool = True
     SERVER_BASE_API: str = "/api/v1"
