@@ -1,0 +1,6 @@
+# nextjs // turbo
+node_modules
+
+# python
+.venv
+apps/api/
